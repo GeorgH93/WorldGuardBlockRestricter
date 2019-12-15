@@ -1,0 +1,22 @@
+# To simplify the customisation and the translation process please check out the editor: http://ptp.pcgamingfreaks.at
+Language:
+  # message when a player is denied to place a block:
+  # {Block} is replaced with the block the player tried to place
+  DenyBlockPlace: "[{\"text\":\"You are not allowed to place \",\"color\":\"red\"},{\"text\":\"{Block}\",\"bold\":true},{\"text\":\" here.\"}]"
+  # message when a player is denied to break a block:
+  # {Block} is replaced with the block the player tried to break
+  DenyBlockBreak: "[{\"text\":\"You are not allowed to break\",\"color\":\"red\"},{\"text\":\"{Block}\",\"bold\":true},{\"text\":\" here.\"}]"
+  # message when a player is denied to place a painting or an item frame:
+  # {Block} is replaced with the block the player tried to place
+  DenyHangingPlace: "[{\"text\":\"You are not allowed to place \",\"color\":\"red\"},{\"text\":\"{Block}\",\"bold\":true},{\"text\":\" here.\"}]"
+  # message when a player is denied to break a painting or an item frame:
+  # {Block} is replaced with the block the player tried to break
+  DenyHangingBreak: "[{\"text\":\"You are not allowed to break\",\"color\":\"red\"},{\"text\":\"{Block}\",\"bold\":true},{\"text\":\" here.\"}]"
+
+# The name of the language represented by the language file
+LanguageName: "English"
+# The author of the language file
+Author: "GeorgH93"
+
+# Language file version. Don't touch it!
+Version: 1

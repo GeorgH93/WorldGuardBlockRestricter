@@ -1,9 +1,12 @@
-name: ${project.name}
-main: com.mewin.WGBlockRestricter.WGBlockRestricterPlugin
-description: ${project.description}
-version: ${project.version}
-authors: [ GeorgH93, mewin ]
-depend: [ WorldGuard ]
+name: "${project.name}"
+author: "${author}"
+website: "${project.url}"
+main: "${mainClass}"
+description: "${project.description}"
+version: "${version}"
+api-version: "1.13"
+
+depend: [ WorldGuard, PCGF_PluginLib ]
 
 permissions:
   wgblockrestricter.ignore:
