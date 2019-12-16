@@ -1,8 +1,10 @@
 package at.pcgamingfreaks.WorldGuardBlockRestricter.Bukkit;
 
+import at.pcgamingfreaks.Bukkit.Updater;
 import at.pcgamingfreaks.Configuration;
 import at.pcgamingfreaks.StringUtils;
 import at.pcgamingfreaks.Bukkit.Language;
+import at.pcgamingfreaks.Updater.UpdateProviders.JenkinsUpdateProvider;
 import at.pcgamingfreaks.WorldGuardBlockRestricter.Bukkit.Flags.BlockMaterialFlag;
 
 import com.sk89q.worldguard.WorldGuard;
@@ -56,10 +58,13 @@ public class WorldGuardBlockRestricter extends JavaPlugin
 	@Override
 	public void onDisable()
 	{
+		Updater updater = new Updater(this, this.getFile(), true, new JenkinsUpdateProvider("https://ci.pcgamingfreaks.at", "WorldGuardBlockRestricter", this.getLogger()));
+		updater.update();
 		language = null;
 		wg = null;
 		checker = null;
 		HandlerList.unregisterAll(this);
+		updater.waitForAsyncOperation();
 		getLogger().info(StringUtils.getPluginDisabledMessage(getDescription().getFullName()));
 	}
 }
