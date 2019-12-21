@@ -24,19 +24,22 @@ public class BlockMaterialFlag extends Flag<Material>
 	public Material parseInput(FlagContext flagContext) throws InvalidFlagFormat
 	{
 		String input = flagContext.getUserInput();
-		Material mat = Material.matchMaterial(input);
-		if(mat == null)
+		Material mat = null;
+		Matcher matcher = OLD_ITEM_PATTERN.matcher(input);
+		if(matcher.matches())
 		{
-			Matcher matcher = OLD_ITEM_PATTERN.matcher(input);
-			if(matcher.matches())
-			{
-				int id = Integer.parseUnsignedInt(matcher.group("id")), data = 0;
-				String dataString = matcher.group("data");
-				if(dataString != null && !dataString.isEmpty()) data = Integer.parseUnsignedInt(dataString);
-				ItemType itemType = LegacyMapper.getInstance().getItemFromLegacy(id, data);
-				if(itemType != null) mat = BukkitAdapter.adapt(itemType);
-			}
+			int id = Integer.parseUnsignedInt(matcher.group("id")), data = 0;
+			String dataString = matcher.group("data");
+			if(dataString != null && !dataString.isEmpty()) data = Integer.parseUnsignedInt(dataString);
+			ItemType itemType = LegacyMapper.getInstance().getItemFromLegacy(id, data);
+			if(itemType != null) mat = BukkitAdapter.adapt(itemType);
 		}
+		else
+		{
+			mat = Material.matchMaterial(input);
+			if(mat == null) mat = Material.matchMaterial(input, true);
+		}
+
 		if(mat == null) throw new InvalidFlagFormat("The material \"" + input + "\" is unknown.");
 		return mat;
 	}
