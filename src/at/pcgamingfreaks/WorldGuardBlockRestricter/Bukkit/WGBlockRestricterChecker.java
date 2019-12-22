@@ -17,26 +17,24 @@ public class WGBlockRestricterChecker
 {
 	public static final EnumMap<Material, Material> baseMaterials = new EnumMap<>(Material.class);
 
-	private final WorldGuard wg;
 	private final RegionContainer container;
 
 	public WGBlockRestricterChecker(WorldGuard worldGuard)
 	{
-		this.wg = worldGuard;
-		container = wg.getPlatform().getRegionContainer();
+		container = worldGuard.getPlatform().getRegionContainer();
 	}
 
-	public boolean placeAllowedAtLocation(Material mat, Location loc)
+	public boolean placeDeniedAtLocation(Material mat, Location loc)
 	{
-		return actionAllowedAtLocation(mat, loc, WorldGuardBlockRestricter.ALLOW_PLACE_FLAG, WorldGuardBlockRestricter.DENY_PLACE_FLAG);
+		return actionDeniedAtLocation(mat, loc, WorldGuardBlockRestricter.ALLOW_PLACE_FLAG, WorldGuardBlockRestricter.DENY_PLACE_FLAG);
 	}
 
-	public boolean breakAllowedAtLocation(Material mat, Location loc)
+	public boolean breakDeniedAtLocation(Material mat, Location loc)
 	{
-		return actionAllowedAtLocation(mat, loc, WorldGuardBlockRestricter.ALLOW_BREAK_FLAG, WorldGuardBlockRestricter.DENY_BREAK_FLAG);
+		return actionDeniedAtLocation(mat, loc, WorldGuardBlockRestricter.ALLOW_BREAK_FLAG, WorldGuardBlockRestricter.DENY_BREAK_FLAG);
 	}
 
-	public boolean actionAllowedAtLocation(Material mat, Location loc, SetFlag<Material> allowedMats, SetFlag<Material> blockedMats)
+	public boolean actionDeniedAtLocation(Material mat, Location loc, SetFlag<Material> allowedMats, SetFlag<Material> blockedMats)
 	{
 		RegionManager rm;
 		Material blockType = mat;
@@ -44,9 +42,10 @@ public class WGBlockRestricterChecker
 		{
 			blockType = baseMaterials.get(blockType);
 		}
+		//noinspection ConstantConditions
 		if((rm = container.get(BukkitAdapter.adapt(loc.getWorld()))) == null)
 		{
-			return true;
+			return false;
 		}
 		ApplicableRegionSet regions = rm.getApplicableRegions(BukkitAdapter.asBlockVector(loc));
 		Iterator<ProtectedRegion> itr = regions.iterator();
@@ -72,16 +71,16 @@ public class WGBlockRestricterChecker
 				ProtectedRegion region = entry.getKey();
 				boolean value = entry.getValue();
 				if(ignoredRegions.contains(region) || !value) continue;
-				return true;
+				return false;
 			}
-			return false;
+			return true;
 		}
 		Object allowed = actionAllowedInRegion(rm.getRegion("__global__"), blockType, allowedMats, blockedMats);
 		if(allowed != null)
 		{
 			return (Boolean) allowed;
 		}
-		return true;
+		return false;
 	}
 
 	public static Object blockAllowedInRegion(ProtectedRegion region, Material blockType)
@@ -92,16 +91,6 @@ public class WGBlockRestricterChecker
 		if(allowedBlocks != null && (allowedBlocks.contains(blockType) || allowedBlocks.contains(Material.AIR))) return true;
 		if(blockedBlocks != null && (blockedBlocks.contains(blockType) || blockedBlocks.contains(Material.AIR))) return false;
 		return null;
-	}
-
-	public static Object placeAllowedInRegion(ProtectedRegion region, Material blockType)
-	{
-		return actionAllowedInRegion(region, blockType, WorldGuardBlockRestricter.ALLOW_PLACE_FLAG, WorldGuardBlockRestricter.DENY_PLACE_FLAG);
-	}
-
-	public static Object breakAllowedInRegion(ProtectedRegion region, Material blockType)
-	{
-		return actionAllowedInRegion(region, blockType, WorldGuardBlockRestricter.ALLOW_BREAK_FLAG, WorldGuardBlockRestricter.DENY_BREAK_FLAG);
 	}
 
 	public static Object actionAllowedInRegion(ProtectedRegion region, Material blockType, SetFlag<Material> allowedMats, SetFlag<Material> blockedMats)
@@ -135,14 +124,6 @@ public class WGBlockRestricterChecker
 		baseMaterials.put(Material.SUGAR_CANE_BLOCK, Material.SUGAR_CANE);
 		baseMaterials.put(Material.STATIONARY_LAVA, Material.WATER);
 		baseMaterials.put(Material.STRING, Material.TRIPWIRE);
-		baseMaterials.put(Material.WATER_BUCKET, Material.WATER);
-		aliases.put("piston", Material.PISTON_BASE);
-		aliases.put("redstone_lamp", Material.REDSTONE_LAMP_ON);
-		aliases.put("stone_brick", Material.SMOOTH_BRICK);
-		aliases.put("painting", Material.PAINTING);
-		aliases.put("item_frame", Material.ITEM_FRAME);
-		aliases.put("any", Material.AIR);
-		aliases.put("sign", Material.SIGN);
-		aliases.put("diode", Material.DIODE);*/
+		baseMaterials.put(Material.WATER_BUCKET, Material.WATER);*/
 	}
 }
