@@ -19,6 +19,7 @@ import lombok.Getter;
 
 public class WorldGuardBlockRestricter extends JavaPlugin
 {
+	@Getter private static WorldGuardBlockRestricter instance;
 	public static final BlockMaterialFlag BLOCK_TYPE_FLAG = new BlockMaterialFlag("block-type");
 	public static final SetFlag<Material> ALLOW_BLOCK_FLAG = new SetFlag<>("allow-blocks", BLOCK_TYPE_FLAG);
 	public static final SetFlag<Material> DENY_BLOCK_FLAG = new SetFlag<>("deny-blocks", BLOCK_TYPE_FLAG);
@@ -30,6 +31,8 @@ public class WorldGuardBlockRestricter extends JavaPlugin
 	private WGBlockRestricterChecker checker = null;
 	@Getter(AccessLevel.PACKAGE) private Language language;
 	private Configuration config;
+
+	public String messageUnknownMaterial;
 
 	@Override
 	public void onLoad()
@@ -50,8 +53,12 @@ public class WorldGuardBlockRestricter extends JavaPlugin
 		config = new at.pcgamingfreaks.Bukkit.Configuration(this, 1);
 		language = new Language(this, 1);
 		language.load(config);
+
+		messageUnknownMaterial = language.getTranslated("UnknownMaterial").replaceAll("\\{Input}", "%s");
+
 		checker = new WGBlockRestricterChecker(wg);
 		getServer().getPluginManager().registerEvents(new BlockListener(this, checker), this);
+		instance = this;
 		getLogger().info(StringUtils.getPluginEnabledMessage(getDescription().getFullName()));
 	}
 
@@ -65,6 +72,7 @@ public class WorldGuardBlockRestricter extends JavaPlugin
 		checker = null;
 		HandlerList.unregisterAll(this);
 		updater.waitForAsyncOperation();
+		instance = null;
 		getLogger().info(StringUtils.getPluginDisabledMessage(getDescription().getFullName()));
 	}
 }

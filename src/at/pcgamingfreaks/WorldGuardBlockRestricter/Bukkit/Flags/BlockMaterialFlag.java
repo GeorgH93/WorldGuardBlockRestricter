@@ -1,5 +1,8 @@
 package at.pcgamingfreaks.WorldGuardBlockRestricter.Bukkit.Flags;
 
+import at.pcgamingfreaks.Bukkit.Message.Message;
+import at.pcgamingfreaks.WorldGuardBlockRestricter.Bukkit.WorldGuardBlockRestricter;
+
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.world.item.ItemType;
 import com.sk89q.worldedit.world.registry.LegacyMapper;
@@ -18,6 +21,7 @@ public class BlockMaterialFlag extends Flag<Material>
 {
 	private static final Pattern OLD_ITEM_PATTERN = Pattern.compile("^(?<id>\\d+)(:(?<data>\\d+))?$");
 	private static final Map<String, Material> ALIASES = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+
 	public BlockMaterialFlag(String name)
 	{
 		super(name);
@@ -46,7 +50,7 @@ public class BlockMaterialFlag extends Flag<Material>
 			}
 		}
 
-		if(mat == null) throw new InvalidFlagFormat("The material \"" + input + "\" is unknown.");
+		if(mat == null) throw new InvalidFlagFormat(String.format(WorldGuardBlockRestricter.getInstance().messageUnknownMaterial, input));
 		return mat;
 	}
 
