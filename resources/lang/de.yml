@@ -2,22 +2,22 @@
 Language:
   # Message when a player is denied to place a block:
   # {Block} is replaced with the block the player tried to place
-  DenyBlockPlace: "[{\"text\":\"You are not allowed to place \",\"color\":\"red\"},{\"text\":\"{Block}\",\"bold\":true},{\"text\":\" here.\"}]"
+  DenyBlockPlace: "[{\"text\":\"Es ist dir hier nicht erlaubt \",\"color\":\"red\"},{\"text\":\"{Block}\",\"bold\":true},{\"text\":\" zu platzieren.\"}]"
   # Message when a player is denied to break a block:
   # {Block} is replaced with the block the player tried to break
-  DenyBlockBreak: "[{\"text\":\"You are not allowed to break \",\"color\":\"red\"},{\"text\":\"{Block}\",\"bold\":true},{\"text\":\" here.\"}]"
+  DenyBlockBreak: "[{\"text\":\"Es ist dir hier nicht erlaubt \",\"color\":\"red\"},{\"text\":\"{Block}\",\"bold\":true},{\"text\":\" zu zerstören.\"}]"
   # Message when a player is denied to place a painting or an item frame:
   # {Block} is replaced with the block the player tried to place
-  DenyHangingPlace: "[{\"text\":\"You are not allowed to place \",\"color\":\"red\"},{\"text\":\"{Block}\",\"bold\":true},{\"text\":\" here.\"}]"
+  DenyHangingPlace: "[{\"text\":\"Es ist dir hier nicht erlaubt \",\"color\":\"red\"},{\"text\":\"{Block}\",\"bold\":true},{\"text\":\" zu platzieren.\"}]"
   # Message when a player is denied to break a painting or an item frame:
   # {Block} is replaced with the block the player tried to break
-  DenyHangingBreak: "[{\"text\":\"You are not allowed to break\",\"color\":\"red\"},{\"text\":\"{Block}\",\"bold\":true},{\"text\":\" here.\"}]"
+  DenyHangingBreak: "[{\"text\":\"Es ist dir hier nicht erlaubt \",\"color\":\"red\"},{\"text\":\"{Block}\",\"bold\":true},{\"text\":\" zu zerstören.\"}]"
   # Message if the material could not be parsed correctly
   # {Input} is replaced with the input of the user
-  UnknownMaterial: "The material '{Input}' is unknown."
+  UnknownMaterial: "Unbekanntes Material: {Input}"
 
 # The name of the language represented by the language file
-LanguageName: "English"
+LanguageName: "German"
 # The author of the language file
 Author: "GeorgH93"
 
