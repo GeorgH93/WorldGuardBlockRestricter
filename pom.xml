@@ -53,8 +53,8 @@
 			<url>https://hub.spigotmc.org/nexus/content/groups/public</url>
 		</repository>
 		<repository>
-			<id>sk89q-repo</id>
-			<url>https://maven.sk89q.com/repo/</url>
+			<id>enginehub-repo</id>
+			<url>https://maven.enginehub.org/repo/</url>
 		</repository>
 	</repositories>
 
@@ -73,7 +73,7 @@
 		<dependency>
 			<groupId>com.sk89q.worldguard</groupId>
 			<artifactId>worldguard-bukkit</artifactId>
-			<version>7.0.2-SNAPSHOT</version>
+			<version>7.0.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
