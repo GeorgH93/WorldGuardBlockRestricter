@@ -73,7 +73,7 @@
 		<dependency>
 			<groupId>com.sk89q.worldguard</groupId>
 			<artifactId>worldguard-bukkit</artifactId>
-			<version>7.0.3</version>
+			<version>7.0.5</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
